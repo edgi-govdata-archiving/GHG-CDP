@@ -3,12 +3,11 @@
 # Template
 Based on the EDGI Repo Guidelines at https://github.com/edgi-govdata-archiving/overview/blob/main/repo_guidelines.md
 
-This repo is a template for all EDGI templates. Replace this paragraph with a description of the repo.
+This repo contains code and data inputs/outputs related to the Climate Data Project by EDGI.
 
 # How to start contributing to this repo
-* Instructions go here
-* Developer setup (if relevant)
-* Slack channel (if relevant)
+* When using SOE_GHG_2.ipynb, the primary notebook where analysis is done, please CLEAR THE OUTPUT of the cells that produce maps before committing code to this repo. The outputted maps can make the file size massive.
+* It is recommended to install VSCode and search for Notebook/Python installation through the VSCode store.
 
 **Suggestions for additional components of Readmes:**
 * A "How to use" section if the repo's project is a tool or website
