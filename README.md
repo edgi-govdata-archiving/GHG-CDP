@@ -9,6 +9,8 @@ This repo contains code and data inputs/outputs related to the Climate Data Proj
 * When using SOE_GHG_2.ipynb, the primary notebook where analysis is done, please CLEAR THE OUTPUT of the cells that produce maps before committing code to this repo. The outputted maps can make the file size massive.
 * It is recommended to install VSCode and search for Notebook/Python installation through the VSCode store.
 * If the user wants to run the code blocks that generate congressional district maps, they must have the file "cds_119th.geojson" in the "input_data" folder. This file is large, thus it's not stored in this repo by default. Ask a team member to provide the file and manually add it into "input_data" on your local machine.
+* The file "facility_frsid_metadata.csv" contains all metadata for all (Facility Id, FRS Id) pairs.
+* The file "facility_metadata.csv" contains all metadata for each Facility Id, and any FRS Id's associated with each Facility Id is compressed into a list associated with that Facility Id.
 
 **Suggestions for additional components of Readmes:**
 * A "How to use" section if the repo's project is a tool or website
