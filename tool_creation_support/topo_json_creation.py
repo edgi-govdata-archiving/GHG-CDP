@@ -418,17 +418,25 @@ def build_cd_topojson():
 def build_facility_geojson():
     print("\n[4/5] Building facility GeoJSON files ...")
 
-    df = pd.read_csv(EMISSIONS_FACILITY_CSV, low_memory=False)
+    # Read the FIPS/district codes as strings. The CSV stores them zero-padded
+    # (e.g. "06039"), but if pandas is left to infer the dtype it reads the whole
+    # column as float64 — because missing offshore rows introduce NaN — which
+    # strips leading zeros and appends ".0" (06039 -> "6039.0").
+    df = pd.read_csv(
+        EMISSIONS_FACILITY_CSV,
+        low_memory=False,
+        dtype={"County_FIPS": str, "DISTRICTID": str},
+    )
 
     # Keep only columns that exist in this version of the file
     cols = [c for c in FACILITY_KEEP_COLS if c in df.columns]
     df = df[cols].dropna(subset=["Latitude", "Longitude"]).copy()
 
-    # Normalise ID fields
+    # Normalise ID fields (safety net; values are already zero-padded strings).
     if "County_FIPS" in df.columns:
-        df["County_FIPS"] = df["County_FIPS"].astype(str).str.zfill(5)
+        df["County_FIPS"] = df["County_FIPS"].str.zfill(5)
     if "DISTRICTID" in df.columns:
-        df["DISTRICTID"] = df["DISTRICTID"].astype(str).str.zfill(4)
+        df["DISTRICTID"] = df["DISTRICTID"].str.zfill(4)
 
     for year in sorted(df["Year"].unique()):
         year_df = df[df["Year"] == year]
